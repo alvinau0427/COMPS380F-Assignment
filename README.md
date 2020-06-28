@@ -44,7 +44,7 @@
 
 ## Installation
 
-## Setup
+### Setup
 - Please create the JDBC derby database with the following information and import 3 of the SQL file in `src/resources`
 ```
 Database name: GroupProject
