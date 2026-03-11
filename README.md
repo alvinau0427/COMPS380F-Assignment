@@ -1,67 +1,59 @@
 # COMPS380F-Assignment
-> OUHK 2019/20 Web Applications Design and Development (COMPS380F) Assignment
+> **OUHK 2019/20 Web Applications Design and Development (COMPS380F) Assignment**
+>
+> A full-featured enterprise web application built with **Spring MVC** and **Spring Security**, providing a structured platform for academic discussions, resource sharing, and polling.
 
-> JavaEE Web Application: Course Discussion Forum
+[![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white)](#) &nbsp;
+[![Spring](https://img.shields.io/badge/Spring-6DB33F?logo=springboot&logoColor=fff)](#) &nbsp;
+[![Spring Security](https://img.shields.io/badge/Spring%20Security-6DB33F?logo=springsecurity&logoColor=fff)](#) &nbsp;
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) &nbsp;
 
-[![Build Status](https://travis-ci.com/alvinau0427/COMPS380F-Assignment.svg?branch=master)](https://travis-ci.org/alvinau0427/COMPS380F-Assignment)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+## Project Overview
+This forum system is designed to handle academic interactions through a hierarchical structure. It utilizes **Spring MVC** for request handling and **Spring Security** for robust authentication and Role-Based Access Control (RBAC).
 
-## Getting Started
-- The web application fulfil the following basic requirements on web pages and functionalities:
-	- Using major techniques of **Java EE**, **HTML5**, **CSS**, **Javascript**.
-	- Required to use **Spring MVC web framework** and **Spring Security**.
-	- Dynamic pages generation based on user’s input or request.
-	- Using the **Apache Derby database** as backend for data storage (but not necessary for uploaded files).
-	- The web application should be easy to use for normal users.
+### Core Architecture:
+* **Controller Layer:** Managed by Spring MVC for dynamic page generation.
+* **Security Layer:** Implements Spring Security to safeguard file downloads and administrative actions.
+* **Data Layer:** Persistent storage using Apache Derby SQL database for users, threads, and binary file attachments.
 
-## Fectures
-- Forum hierarchy:
-	- The forum has an index page, which shows 3 **categories**: Lecture, Lab, Other
-	- Each category has a set of threads and the total number of threads.
-	- Each thread has a post called **message topic**, a set of **replies** to that message topic, and the **total number of replies**.
+## Role-Based Access Control (RBAC)
+| Feature | Guest | Registered User | Administrator |
+| :--- | :---: | :---: | :---: |
+| View Threads & Poll Results | ✅ | ✅ | ✅ |
+| Create Threads & Replies | ❌ | ✅ | ✅ |
+| Vote in Polls | ❌ | ✅ | ✅ |
+| Download Attachments | ❌ | ✅ | ✅ |
+| Batch Upload Files | ❌ | ✅ | ✅ |
+| Delete Threads/Replies | ❌ | ❌ | ✅ |
+| Manage User Accounts | ❌ | ❌ | ✅ |
+| Create New Polls | ❌ | ❌ | ✅ |
 
-- User registration and login
+## Advanced Features
+* **Hierarchical Organization:** Content categorized into *Lecture*, *Lab*, and *Other* with real-time thread/reply counters.
+* **Poll System:** Interactive Multiple-Choice polling with historical result tracking.
+* **Blob Management:** Storing file attachments directly within the relational database as BLOBs.
+* **Batch Operations:** Efficient batch uploading for multiple file attachments in a single post.
 
-- Unregistered users can read all content except downloading file attachments and voting for the poll:
-	- Read all threads in each of the categories.
-	- View the result of the current forum poll, i.e., the number of users who voted for the poll, and the number of users who chose each MC response.
+## Installation & Setup
+### 1. Database Configuration
+Create a JDBC Derby database with the following credentials:
+* **Database Name:** `GroupProject`
+* **Username:** `nbuser`
+* **Password:** `nbuser`
 
-- Registered user can read all content, download file attachments, write new posts and vote for the poll:
-	- Write a message topic of a new thread in one of the categories.
-	- Write a new reply to one of the message topics.
-	- Vote for the current forum poll; a user can only vote once for a poll.
+### 2. Initialize Data
+Import the 3 SQL files located in `src/resources` to initialize the schema and default accounts.
 
-- The forum administrator can do anything that a registered user can do, and the followings:
-	- Delete a reply in a thread
-	- Delete a thread (including the message topic and all its replies).
-	- Edit (add, remove, update) the list of registered users and their information.
-	- Create a new forum poll.
-
-- Additional Features
-	- History on the existing and previous forum poll results
-	- Batch uploading of file attachments
-	- Storing file attachments to the relational database
-
-## Installation
-
-### Setup
-- Please create the JDBC derby database with the following information and import 3 of the SQL file in `src/resources`
-```
-Database name: GroupProject
-Username: nbuser
-Password: nbuser
-
-Administrator permission user
-username: admin, password: admin
-username: keith, password: keithpw
-usernmae: vanessa, password: vanessapw
-
-User permission user
-username: user1, password: user1
-username: user2, password: user2
-username: kevin, password: kevinpw
-username: oliver, password: oliverpw
-```
+### 3. Default Accounts
+| Role | Username | Password |
+| :--- | :--- | :--- |
+| **Admin** | `admin` | `admin` |
+| **Admin** | `keith` | `keithpw` |
+| **Admin** | `vanessa` | `vanessapw` |
+| **User** | `user1` | `user1` |
+| **User** | `user2` | `user2` |
+| **User** | `kevin` | `kevinpw` |
+| **User** | `oliver` | `oliverpw` |
 
 ## Screenshots
 ![Image](https://github.com/alvinau0427/COMPS380F-Assignment/blob/master/doc/demo.png)
